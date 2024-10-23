@@ -21,40 +21,85 @@ El **Sudoku** es un problema que ha captado la atención tanto de matemáticos c
 
 ## **Descripción de los Algoritmos**
 
-### 1. **Backtracking**
+## 1. Backtracking
 
-El algoritmo **Backtracking** explora exhaustivamente todas las posibilidades, regresando a pasos anteriores si encuentra inconsistencias. Según Cormen et al. (2009), “los algoritmos de retroceso generan todas las soluciones posibles mediante una búsqueda sistemática en el espacio de soluciones posibles”.
+El **algoritmo de backtracking** (o retroceso) es un enfoque clásico basado en fuerza bruta, ampliamente utilizado para problemas de búsqueda combinatoria (Russell & Norvig, 2020). En este algoritmo, se intentan todas las posibilidades secuencialmente hasta encontrar una solución válida, retrocediendo en caso de que una opción no funcione. Su eficiencia depende significativamente del tamaño del tablero y de la posición de las celdas vacías.
 
-- **Complejidad**: Exponencial \(O(b^d)\), donde \(b\) es el número de opciones por celda y \(d\) es la profundidad de búsqueda (Cormen et al., 2009).
-- **Ventajas**: Asegura encontrar una solución si existe.
-- **Desventajas**: Se vuelve ineficiente para puzzles grandes.
+**Ventajas:**
+- Es completo y siempre encontrará una solución si existe.
+- Sencillo de implementar y entender.
 
----
+**Desventajas:**
+- Su rendimiento disminuye rápidamente con problemas de gran escala debido a su complejidad \(O(b^d)\), donde \(b\) es el número de opciones por nodo y \(d\) es la profundidad del árbol de búsqueda (Cormen et al., 2009).
 
-### 2. **Hill Climbing**
+**Análisis de rendimiento:**
+- En Colab: 0.0042 segundos.
+- En Jupyter Notebook: 0.0955 segundos.
+- En ejecución directa en terminal: 0.0242 segundos.
 
-**Hill Climbing** es un algoritmo de optimización que busca mejorar gradualmente una solución inicial aleatoria. Sin embargo, Russell y Norvig (2020) advierten que “puede quedar atrapado en un máximo local, lo que impide encontrar la solución óptima”.
-
-- **Ventajas**: Es rápido y consume menos recursos que el backtracking.
-- **Desventajas**: No siempre garantiza una solución global óptima.
-
----
-
-### 3. **A\***
-
-El **algoritmo A\*** utiliza una heurística para priorizar las celdas más prometedoras, equilibrando eficiencia y exhaustividad. Norvig (1992) señala que “el uso de heurísticas adecuadas permite reducir significativamente el espacio de búsqueda”.
-
-- **Ventajas**: Logra un buen equilibrio entre velocidad y exhaustividad.
-- **Desventajas**: Requiere más memoria y procesamiento en comparación con otros algoritmos.
+El rendimiento de este algoritmo varía sustancialmente entre entornos, mostrando mejor desempeño en plataformas optimizadas como Colab.
 
 ---
 
-### 4. **Búsqueda Aleatoria**
+## 2. Hill Climbing (Ascenso de Colinas)
 
-La **Búsqueda Aleatoria** intenta llenar el tablero de forma aleatoria hasta encontrar una solución válida. Aunque simple, es un método altamente ineficiente. Como mencionan Cormen et al. (2009), “las búsquedas no informadas pueden ser costosas en términos de tiempo, especialmente si no se aplican restricciones”.
+El **algoritmo de Hill Climbing** pertenece a la categoría de algoritmos de optimización local, donde se busca mejorar una solución iterativamente hasta llegar a un máximo local (Russell & Norvig, 2020). El objetivo es minimizar los conflictos en el tablero del Sudoku hasta encontrar una configuración válida.
 
-- **Ventajas**: Fácil de implementar.
-- **Desventajas**: Muy ineficiente y no garantiza encontrar soluciones en un tiempo razonable.
+**Ventajas:**
+- Puede ser más rápido que backtracking, especialmente en problemas donde la búsqueda completa no es factible.
+- Requiere menos memoria.
+
+**Desventajas:**
+- Tiende a quedarse atrapado en máximos locales, lo que puede impedir alcanzar la solución global.
+- Su éxito depende de la calidad de la solución inicial aleatoria.
+
+**Análisis de rendimiento:**
+- En Colab: 0.0153 segundos.
+- En Jupyter Notebook: 0.0047 segundos.
+- En ejecución directa: 0.0053 segundos.
+
+Hill Climbing es una opción eficiente para entornos donde la rapidez es prioritaria, pero su dependencia de soluciones iniciales puede ser un obstáculo en algunos casos.
+
+---
+
+## 3. A*
+
+El **algoritmo A\*** es una técnica de búsqueda informada que utiliza una heurística para priorizar las celdas más prometedoras (Norvig, 1992). En el contexto del Sudoku, evalúa qué tan cerca está la solución completa, asignando prioridad a las celdas con menos opciones disponibles.
+
+**Ventajas:**
+- Equilibra la búsqueda sistemática con la aleatoriedad, lo que mejora la eficiencia.
+- Garantiza encontrar la solución óptima si la heurística es admisible.
+
+**Desventajas:**
+- Requiere más memoria y procesamiento en comparación con backtracking.
+- Su rendimiento puede depender de la calidad de la heurística utilizada.
+
+**Análisis de rendimiento:**
+- En Colab: 0.0105 segundos.
+- En Jupyter Notebook: 0.1653 segundos.
+- En ejecución directa: 0.0431 segundos.
+
+El algoritmo A* se muestra consistente en la mayoría de los entornos, aunque es más lento en sistemas menos optimizados, como Jupyter.
+
+---
+
+## 4. Búsqueda Aleatoria
+
+La **búsqueda aleatoria** intenta resolver el problema llenando el tablero de manera completamente aleatoria hasta encontrar una solución válida o alcanzar un límite de intentos. Esta técnica sirve más como referencia que como una estrategia práctica de resolución.
+
+**Ventajas:**
+- Es fácil de implementar y no requiere conocimiento previo del problema.
+
+**Desventajas:**
+- Su eficiencia es extremadamente baja, con complejidad alta debido a la falta de dirección en la búsqueda.
+- No garantiza encontrar una solución dentro de un tiempo razonable.
+
+**Análisis de rendimiento:**
+- En Colab: 4.8412 segundos.
+- En Jupyter Notebook: 4.3739 segundos.
+- En ejecución directa: 3.1919 segundos.
+
+Este método es significativamente más lento en comparación con los otros algoritmos, reflejando la ineficiencia de la búsqueda sin un enfoque heurístico.
 
 ---
 
@@ -73,12 +118,7 @@ El rendimiento de cada algoritmo se evaluó en tres entornos diferentes: Google 
 
 ## **Conclusiones**
 
-Los resultados obtenidos muestran que:
-
-- **Backtracking** es efectivo pero consume más tiempo en algunos entornos, siendo ideal para encontrar soluciones garantizadas en tableros pequeños.
-- **Hill Climbing** es el algoritmo más rápido, pero puede quedar atrapado en soluciones subóptimas.
-- **A\*** proporciona un equilibrio entre eficiencia y exhaustividad, pero puede ser costoso en términos de memoria.
-- **Búsqueda Aleatoria** es el método menos eficiente, útil solo como referencia comparativa.
+Cada uno de los algoritmos analizados presenta ventajas y desventajas claras, lo que permite seleccionar el más adecuado según las circunstancias. En entornos donde la rapidez es esencial, **Hill Climbing** es una opción viable, aunque su limitación de quedar atrapado en máximos locales puede ser un inconveniente. **Backtracking** es ideal para obtener una solución garantizada, pero su rendimiento varía según el entorno de ejecución. **A\*** ofrece un equilibrio entre búsqueda exhaustiva y aleatoriedad, destacando en entornos computacionales más robustos. Por otro lado, la **Búsqueda Aleatoria** es ineficaz y solo es útil para propósitos comparativos.
 
 ---
 
