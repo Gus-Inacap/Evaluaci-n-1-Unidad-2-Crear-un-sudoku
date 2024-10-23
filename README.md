@@ -1,80 +1,88 @@
 # Sudoku Solver: Algoritmos para Resolver Sudoku
 
-Este proyecto contiene la implementación de varios algoritmos para la resolución de **Sudoku**, incluyendo **Backtracking**, **Hill Climbing**, **A\*** y **Búsqueda Aleatoria**. Además, se mide el rendimiento de cada algoritmo en distintos entornos.
-
-## Estructura del Proyecto
-
-1. **Generación del Tablero de Sudoku**:
-   - `create_board()`: Genera un tablero base aleatorio.
-   - `remove_numbers(board, difficulty)`: Ajusta la dificultad del puzzle eliminando números.
-
-2. **Algoritmos de Resolución**:
-   - **Backtracking**: Algoritmo de fuerza bruta que garantiza una solución.
-   - **Hill Climbing**: Optimización iterativa con posibilidad de quedar atrapado en máximos locales.
-   - **A***: Algoritmo de búsqueda informada con heurística.
-   - **Búsqueda Aleatoria**: Llena el tablero aleatoriamente hasta encontrar una solución.
-
-3. **Funciones Auxiliares**:
-   - `print_board(board)`: Imprime el tablero con formato visual.
-   - `is_valid(board, row, col, num)`: Verifica si un número puede colocarse en una celda específica.
-
-## Análisis de Algoritmos (APA)
-
-### 1. **Backtracking**  
-El algoritmo de **backtracking** busca exhaustivamente una solución mediante prueba y error. Es eficiente para puzzles pequeños, pero su complejidad aumenta exponencialmente con problemas más grandes (Cormen et al., 2009).
-
-**Tiempos promedio**:
-- Colab: 0.0042 segundos.
-- Jupyter Notebook: 0.0955 segundos.
-- Terminal: 0.0242 segundos.
+Este proyecto implementa cuatro algoritmos para la resolución de **Sudoku** y proporciona un análisis detallado de su rendimiento en distintos entornos. Cada algoritmo se evalúa en función de su eficiencia temporal y complejidad, tomando como referencia fuentes académicas reconocidas.
 
 ---
 
-### 2. **Hill Climbing**  
-Este algoritmo optimiza una solución inicial mediante mejoras iterativas, aunque puede quedar atrapado en máximos locales (Russell & Norvig, 2020).
-
-**Tiempos promedio**:
-- Colab: 0.0153 segundos.
-- Jupyter Notebook: 0.0047 segundos.
-- Terminal: 0.0053 segundos.
-
----
-
-### 3. **A***  
-**A\*** usa una heurística para priorizar celdas con menos opciones, equilibrando eficiencia y exhaustividad (Norvig, 1992).
-
-**Tiempos promedio**:
-- Colab: 0.0105 segundos.
-- Jupyter Notebook: 0.1653 segundos.
-- Terminal: 0.0431 segundos.
+## **Tabla de Contenidos**
+- [Introducción](#introducción)
+- [Descripción de los Algoritmos](#descripción-de-los-algoritmos)
+- [Tiempos de Ejecución](#tiempos-de-ejecución)
+- [Conclusiones](#conclusiones)
+- [Referencias](#referencias)
 
 ---
 
-### 4. **Búsqueda Aleatoria**  
-Este método llena el tablero de manera aleatoria, lo que resulta ineficiente, pero sirve como referencia de comparación.
+## **Introducción**
 
-**Tiempos promedio**:
-- Colab: 4.8412 segundos.
-- Jupyter Notebook: 4.3739 segundos.
-- Terminal: 3.1919 segundos.
+El **Sudoku** es un problema que ha captado la atención tanto de matemáticos como de desarrolladores de software, debido a su estructura combinatoria y su complejidad creciente en función del tamaño del tablero y de las celdas vacías (Russell & Norvig, 2020). Resolverlo de forma automática implica aplicar algoritmos de búsqueda y optimización, que se comparan en este proyecto mediante cuatro enfoques: **Backtracking**, **Hill Climbing**, **A\*** y **Búsqueda Aleatoria**.
 
 ---
 
-## Conclusiones
+## **Descripción de los Algoritmos**
 
-Cada algoritmo tiene fortalezas y debilidades, por lo que la elección depende del contexto:
+### 1. **Backtracking**
 
-- **Backtracking** es ideal para obtener soluciones garantizadas.
-- **Hill Climbing** es rápido pero puede no encontrar soluciones globales óptimas.
-- **A\*** ofrece un buen equilibrio, aunque requiere más recursos.
-- **Búsqueda Aleatoria** es la opción menos eficiente y solo útil para comparaciones.
+El algoritmo **Backtracking** explora exhaustivamente todas las posibilidades, regresando a pasos anteriores si encuentra inconsistencias. Según Cormen et al. (2009), “los algoritmos de retroceso generan todas las soluciones posibles mediante una búsqueda sistemática en el espacio de soluciones posibles”.
+
+- **Complejidad**: Exponencial \(O(b^d)\), donde \(b\) es el número de opciones por celda y \(d\) es la profundidad de búsqueda (Cormen et al., 2009).
+- **Ventajas**: Asegura encontrar una solución si existe.
+- **Desventajas**: Se vuelve ineficiente para puzzles grandes.
 
 ---
 
-## Referencias
+### 2. **Hill Climbing**
 
-- Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). *Introduction to Algorithms*. MIT Press.  
-- Norvig, P. (1992). *Paradigms of Artificial Intelligence Programming: Case Studies in Common Lisp*. Morgan Kaufmann.  
-- Russell, S., & Norvig, P. (2020). *Artificial Intelligence: A Modern Approach*. Pearson.
+**Hill Climbing** es un algoritmo de optimización que busca mejorar gradualmente una solución inicial aleatoria. Sin embargo, Russell y Norvig (2020) advierten que “puede quedar atrapado en un máximo local, lo que impide encontrar la solución óptima”.
 
+- **Ventajas**: Es rápido y consume menos recursos que el backtracking.
+- **Desventajas**: No siempre garantiza una solución global óptima.
 
+---
+
+### 3. **A\***
+
+El **algoritmo A\*** utiliza una heurística para priorizar las celdas más prometedoras, equilibrando eficiencia y exhaustividad. Norvig (1992) señala que “el uso de heurísticas adecuadas permite reducir significativamente el espacio de búsqueda”.
+
+- **Ventajas**: Logra un buen equilibrio entre velocidad y exhaustividad.
+- **Desventajas**: Requiere más memoria y procesamiento en comparación con otros algoritmos.
+
+---
+
+### 4. **Búsqueda Aleatoria**
+
+La **Búsqueda Aleatoria** intenta llenar el tablero de forma aleatoria hasta encontrar una solución válida. Aunque simple, es un método altamente ineficiente. Como mencionan Cormen et al. (2009), “las búsquedas no informadas pueden ser costosas en términos de tiempo, especialmente si no se aplican restricciones”.
+
+- **Ventajas**: Fácil de implementar.
+- **Desventajas**: Muy ineficiente y no garantiza encontrar soluciones en un tiempo razonable.
+
+---
+
+## **Tiempos de Ejecución**
+
+El rendimiento de cada algoritmo se evaluó en tres entornos diferentes: Google Colab, Jupyter Notebook y ejecución directa en terminal. 
+
+| **Algoritmo**       | **Colab**       | **Jupyter Notebook** | **Terminal**     |
+|---------------------|----------------|----------------------|-----------------|
+| Backtracking        | 0.0042 s       | 0.0955 s             | 0.0242 s        |
+| Hill Climbing       | 0.0153 s       | 0.0047 s             | 0.0053 s        |
+| A*                 | 0.0105 s       | 0.1653 s             | 0.0431 s        |
+| Búsqueda Aleatoria | 4.8412 s       | 4.3739 s             | 3.1919 s        |
+
+---
+
+## **Conclusiones**
+
+Los resultados obtenidos muestran que:
+
+- **Backtracking** es efectivo pero consume más tiempo en algunos entornos, siendo ideal para encontrar soluciones garantizadas en tableros pequeños.
+- **Hill Climbing** es el algoritmo más rápido, pero puede quedar atrapado en soluciones subóptimas.
+- **A\*** proporciona un equilibrio entre eficiencia y exhaustividad, pero puede ser costoso en términos de memoria.
+- **Búsqueda Aleatoria** es el método menos eficiente, útil solo como referencia comparativa.
+
+---
+
+## **Referencias**
+- Cormen, T. H., Leiserson, C. E., Rivest, R. L., & Stein, C. (2009). Introduction to Algorithms. MIT Press.
+- Norvig, P. (1992). Paradigms of Artificial Intelligence Programming: Case Studies in Common Lisp. Morgan Kaufmann.
+- Russell, S., & Norvig, P. (2020). Artificial Intelligence: A Modern Approach. Pearson.
